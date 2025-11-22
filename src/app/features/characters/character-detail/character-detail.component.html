@@ -1,0 +1,30 @@
+<div *ngIf="character">
+  <img [src]="character.image" alt="{{character.name}}" />
+  <h3>{{ character.name }}</h3>
+
+  <section>
+    <h4>Origin</h4>
+    <div *ngIf="origin; else noOrigin">
+      <p>{{ origin.name }}</p>
+      <div *ngIf="originResident">Residente: {{ originResident.name }}</div>
+    </div>
+    <ng-template #noOrigin><p>No tiene origen definido</p></ng-template>
+  </section>
+
+  <section>
+    <h4>Location</h4>
+    <div *ngIf="location; else noLoc">
+      <p>{{ location.name }}</p>
+      <div *ngIf="locationResident">Residente: {{ locationResident.name }}</div>
+    </div>
+    <ng-template #noLoc><p>No tiene localización definida</p></ng-template>
+  </section>
+
+  <section>
+    <h4>Episode</h4>
+    <div *ngIf="episode; else noEp">
+      <p>{{ episode.name }} ({{ episode.episode }})</p>
+    </div>
+    <ng-template #noEp><p>No tiene episodios</p></ng-template>
+  </section>
+</div>

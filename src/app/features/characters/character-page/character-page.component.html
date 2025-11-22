@@ -1,0 +1,35 @@
+<div class="w-full min-h-screen p-4 bg-gray-100">
+
+  <!-- FAVORITOS -->
+  <div class="mb-4">
+    <app-character-favorites></app-character-favorites>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <!-- TABLA -->
+    <div class="md:col-span-2">
+      <app-characters-table
+        (selected)="onSelect($event)"
+        (charactersLoaded)="onCharactersLoaded($event)"
+      ></app-characters-table>
+    </div>
+
+    <!-- DETALLE -->
+    <div class="bg-white shadow rounded p-4">
+      <app-character-detail
+        [character]="selectedCharacter"
+      ></app-character-detail>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="mt-6">
+    <app-totals-footer
+      [characters]="allCharacters"
+    ></app-totals-footer>
+  </div>
+
+</div>

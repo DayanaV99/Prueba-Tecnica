@@ -1,0 +1,21 @@
+<div class="totals-container">
+
+  <div class="totals-block">
+    <h4>Total por Species</h4>
+    <ul>
+      <li *ngFor="let item of (totalsBySpecies | keyvalue)">
+        <strong>{{ item.key }}:</strong> {{ item.value }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="totals-block">
+    <h4>Total por Type</h4>
+    <ul>
+      <li *ngFor="let item of (totalsByType | keyvalue)">
+        <strong>{{ item.key }}:</strong> {{ item.value }}
+      </li>
+    </ul>
+  </div>
+
+</div>

@@ -1,0 +1,25 @@
+<div class="search-row">
+  <input [formControl]="searchControl" placeholder="Buscar por nombre (texto)"/>
+  <input [formControl]="speciesControl" placeholder="Filtrar species (texto)"/>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Fav</th><th>Name</th><th>Status</th><th>Species</th><th>Type</th><th>Gender</th><th>Created</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of characters" (click)="selectCharacter(c)">
+      <td><button (click)="toggleFavorite(c); $event.stopPropagation()">
+        {{ favSvc.isFavorite(c.id) ? '★' : '☆' }}
+      </button></td>
+      <td>{{ c.name }}</td>
+      <td>{{ c.status }}</td>
+      <td>{{ c.species }}</td>
+      <td>{{ c.type || '-' }}</td>
+      <td>{{ c.gender }}</td>
+      <td>{{ c.created | date }}</td>
+    </tr>
+  </tbody>
+</table>

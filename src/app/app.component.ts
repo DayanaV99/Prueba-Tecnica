@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CharactersPageComponent } from './features/characters/character-page/character-page.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [
+    CharactersPageComponent
+  ],
+  template: '<app-character-page></app-character-page>'
 })
-export class AppComponent {
-  title = 'Prueba-Tecnica';
-}
+export class AppComponent {}
