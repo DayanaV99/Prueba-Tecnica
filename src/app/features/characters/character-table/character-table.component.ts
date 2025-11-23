@@ -3,7 +3,6 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subject, combineLatest } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil, startWith } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-
 import { RickApiRestService } from '../../../core/services/rickapi-rest.service';
 import { Character } from '../../../core/models/character.model';
 import { FavoritesService } from '../../../shared/services/favorites.service';
@@ -11,7 +10,8 @@ import { FavoritesService } from '../../../shared/services/favorites.service';
 @Component({
   selector: 'app-characters-table',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule,
+  ReactiveFormsModule,],
   templateUrl: './character-table.component.html',
   styleUrls: ['./character-table.component.css']
 })

@@ -1,25 +1,68 @@
-<div class="search-row">
-  <input [formControl]="searchControl" placeholder="Buscar por nombre (texto)"/>
-  <input [formControl]="speciesControl" placeholder="Filtrar species (texto)"/>
-</div>
+<div class="rounded-2xl overflow-hidden shadow-2xl border border-white/20
+            bg-white/40 backdrop-blur-xl transition-all">
 
-<table>
-  <thead>
-    <tr>
-      <th>Fav</th><th>Name</th><th>Status</th><th>Species</th><th>Type</th><th>Gender</th><th>Created</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let c of characters" (click)="selectCharacter(c)">
-      <td><button (click)="toggleFavorite(c); $event.stopPropagation()">
-        {{ favSvc.isFavorite(c.id) ? '★' : '☆' }}
-      </button></td>
-      <td>{{ c.name }}</td>
-      <td>{{ c.status }}</td>
-      <td>{{ c.species }}</td>
-      <td>{{ c.type || '-' }}</td>
-      <td>{{ c.gender }}</td>
-      <td>{{ c.created | date }}</td>
-    </tr>
-  </tbody>
-</table>
+  <!-- Encabezado -->
+  <div class="bg-gradient-to-r from-teal-600 via-emerald-500 to-teal-600
+              p-4 text-white text-center font-bold text-xl tracking-wide shadow-md">
+    LISTA DE PERSONAJES
+  </div>
+
+  <!-- Filtros -->
+  <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <input [formControl]="searchControl" placeholder="🔍 Buscar por nombre"
+      class="px-4 py-2 rounded-xl shadow focus:ring-2 focus:ring-teal-400 outline-none bg-white/70 backdrop-blur" />
+
+    <input [formControl]="speciesControl" placeholder="🐾 Filtrar Species"
+      class="px-4 py-2 rounded-xl shadow focus:ring-2 focus:ring-teal-400 outline-none bg-white/70 backdrop-blur" />
+  </div>
+
+  <!-- Tabla con scroll -->
+  <div class="overflow-x-auto">
+    <div class="max-h-[36rem] overflow-y-auto scrollbar-thin scrollbar-thumb-teal-400 scrollbar-track-gray-100">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white">
+            <th class="px-4 py-3">Fav</th>
+            <th class="px-4 py-3">Name</th>
+            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Species</th>
+            <th class="px-4 py-3">Type</th>
+            <th class="px-4 py-3">Gender</th>
+            <th class="px-4 py-3">Created</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let c of characters" (click)="selectCharacter(c)"
+              class="cursor-pointer bg-white/60 backdrop-blur hover:bg-teal-50 hover:scale-[1.01] transition-all duration-200 border-b">
+
+            <td class="px-4 py-3 text-xl">
+              <button class="transition-transform hover:scale-150"
+                      (click)="toggleFavorite(c); $event.stopPropagation()">
+                {{ favSvc.isFavorite(c.id) ? '⭐' : '☆' }}
+              </button>
+            </td>
+
+            <td class="px-4 py-3 font-semibold text-gray-800">{{ c.name }}</td>
+
+            <td class="px-4 py-3">
+              <span class="px-3 py-1 rounded-full text-xs font-bold" [ngClass]="{
+                      'bg-green-200 text-green-700': c.status === 'Alive',
+                      'bg-red-200 text-red-700': c.status === 'Dead',
+                      'bg-gray-300 text-gray-700': c.status === 'unknown'
+                    }">
+                {{ c.status }}
+              </span>
+            </td>
+
+            <td class="px-4 py-3 text-gray-700">{{ c.species }}</td>
+            <td class="px-4 py-3 text-gray-500 italic">{{ c.type || '-' }}</td>
+            <td class="px-4 py-3 text-gray-700">{{ c.gender }}</td>
+            <td class="px-4 py-3 text-gray-600">{{ c.created | date }}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

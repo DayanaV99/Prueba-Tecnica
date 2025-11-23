@@ -1,36 +1,30 @@
-// shared/services/favorites.service.ts
+// src/app/shared/services/favorites.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Character } from '../../core/models/character.model';
 
 @Injectable({ providedIn: 'root' })
 export class FavoritesService {
-  private favKey = 'rm_favorites';
-  private favs$ = new BehaviorSubject<Character[]>(this.load());
 
-  getFavorites() { return this.favs$.asObservable(); }
-  getValue() { return this.favs$.value; }
+  private _favorites = new BehaviorSubject<Character[]>([]);
+  favorites$ = this._favorites.asObservable();
 
-  private load(): Character[] {
-    try { return JSON.parse(localStorage.getItem(this.favKey) || '[]'); } catch { return []; }
+  getFavorites(): Character[] {
+    return this._favorites.value;
   }
 
-  private save(list: Character[]) {
-    localStorage.setItem(this.favKey, JSON.stringify(list));
-    this.favs$.next(list);
+  isFavorite(id: number): boolean {
+    return this._favorites.value.some(f => f.id === id);
   }
 
-  toggleFavorite(char: Character) {
-    const current = this.getValue();
-    const exists = current.find(c => c.id === char.id);
-    if (exists) {
-      this.save(current.filter(c => c.id !== char.id));
-    } else {
-      this.save([...current, char]);
-    }
-  }
+  toggleFavorite(char: Character): void {
+    const list = this._favorites.value;
+    const exists = this.isFavorite(char.id);
 
-  isFavorite(id: number) {
-    return !!this.getValue().find(c => c.id === id);
+    const updated = exists
+      ? list.filter(f => f.id !== char.id)
+      : [...list, char];
+
+    this._favorites.next(updated);
   }
 }

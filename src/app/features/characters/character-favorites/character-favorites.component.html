@@ -1,1 +1,27 @@
-<p>PRUEBA TECNICA</p>
+<p
+  class="text-3xl md:text-4xl font-extrabold text-center
+         bg-gradient-to-r from-teal-500 via-green-400 to-emerald-500
+         text-white py-3 px-4 rounded-xl shadow-lg tracking-wide
+         animate__animated animate__fadeIn">
+  PRUEBA TÉCNICA
+</p>
+
+<br>
+<div class="p-4 bg-white shadow-xl rounded-xl border border-slate-200 animate__animated animate__fadeIn">
+  <h2 class="text-2xl font-bold text-teal-600 mb-3">⭐ Favoritos</h2>
+
+  <div *ngIf="favorites$ | async as favs; else noFavs">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div *ngFor="let f of favs"
+        class="bg-gradient-to-r from-teal-50 to-green-50 border border-teal-200 rounded-lg p-3 shadow hover:shadow-lg hover:-translate-y-1 transition">
+        <p class="font-semibold text-slate-700">⭐ {{ f.name }}</p>
+      </div>
+    </div>
+
+  </div>
+
+  <ng-template #noFavs>
+    <p class="text-gray-500">No hay favoritos aún.</p>
+  </ng-template>
+</div>

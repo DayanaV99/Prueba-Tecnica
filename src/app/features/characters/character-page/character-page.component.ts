@@ -33,4 +33,8 @@ export class CharactersPageComponent {
   onCharactersLoaded(characters: Character[]) {
     this.allCharacters = characters;
   }
+  onSelectFavorite(char: Character) {
+  this.selectedCharacter = char;
+}
+
 }
